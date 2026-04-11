@@ -1,248 +1,391 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FPV Academy - Aprende a Armar Drones</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academia FPV: Guía Definitiva y Talleres</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 250px;
+            }
+        }
+        .interactive-card {
+            transition: all 0.3s ease;
+        }
+        .interactive-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .step-btn.active {
+            background-color: #f59e0b;
+            color: white;
+            border-color: #d97706;
+        }
+        .whatsapp-float {
+            animation: pulse-soft 2s infinite;
+        }
+        @keyframes pulse-soft {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+    </style>
 </head>
-<body>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased relative">
 
-  <!-- NAV -->
-  <nav class="navbar">
-    <div class="nav-inner">
-      <div class="logo">
-        <span class="logo-icon">&#9652;</span>
-        <span class="logo-text">FPV<strong>Academy</strong></span>
-      </div>
-      <ul class="nav-links">
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#cursos">Cursos</a></li>
-        <li><a href="#proceso">Proceso</a></li>
-        <li><a href="#testimonios">Testimonios</a></li>
-        <li><a href="#contacto" class="btn-nav">Inscribirme</a></li>
-      </ul>
-    </div>
-  </nav>
+    <!-- Chosen Palette: Warm Neutrals with Amber/Orange accents (bg-stone-50, text-stone-800, accent-amber-500) -->
+    <!-- Application Structure Plan: Diseño de página única tipo "dashboard de aprendizaje". Se divide en: 1. Intro conceptual. 2. Anatomía interactiva del dron. 3. Análisis de datos (sistemas y presupuesto). 4. Ruta interactiva. 5. NUEVO: Sección de Servicios (Conversión) para talleres y venta. -->
+    <!-- Visualization & Content Choices: 1. Tarjetas interactivas -> Informar. 2. Gráfico de Barras Agrupadas (Chart.js) -> Comparar. 3. Gráfico de Anillo (Chart.js) -> Informar presupuesto. 4. Timeline Interactivo -> Organizar ruta. 5. Call to Action Cards -> Conversión (Servicios/WhatsApp). -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
-  <!-- HERO -->
-  <section class="hero" id="inicio">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <span class="badge">Academia Especializada en Drones FPV</span>
-      <h1>Arma, Programa y<br /><span class="accent">Vuela tu Propio Drone</span></h1>
-      <p>Aprende desde cero con instructores expertos. Cursos prácticos, kits incluidos y comunidad activa de pilotos.</p>
-      <div class="hero-cta">
-        <a href="#cursos" class="btn-primary">Ver Cursos</a>
-        <a href="#proceso" class="btn-outline">¿Cómo funciona?</a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat"><strong>+500</strong><span>Alumnos</span></div>
-        <div class="stat"><strong>12</strong><span>Instructores</span></div>
-        <div class="stat"><strong>98%</strong><span>Satisfacción</span></div>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="drone-graphic">
-        <div class="drone-body"></div>
-        <div class="arm arm-tl"><div class="motor"></div></div>
-        <div class="arm arm-tr"><div class="motor"></div></div>
-        <div class="arm arm-bl"><div class="motor"></div></div>
-        <div class="arm arm-br"><div class="motor"></div></div>
-        <div class="propeller-ring p1"></div>
-        <div class="propeller-ring p2"></div>
-        <div class="propeller-ring p3"></div>
-        <div class="propeller-ring p4"></div>
-      </div>
-    </div>
-  </section>
+    <!-- WhatsApp Floating Button -->
+    <a href="https://api.whatsapp.com/send/?phone=51957085531&text=Hola%2C+quiero+anotarme+al+taller+BT&type=phone_number&app_absent=0" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white py-3 px-5 rounded-full shadow-2xl hover:bg-green-600 transition-colors flex items-center font-bold text-lg border-2 border-white whatsapp-float">
+        <span class="mr-2 text-2xl">💬</span> ¡Escríbenos!
+    </a>
 
-  <!-- CURSOS -->
-  <section class="section courses" id="cursos">
-    <div class="container">
-      <div class="section-header">
-        <span class="tag">Nuestros Cursos</span>
-        <h2>Elige tu Nivel</h2>
-        <p>Desde principiantes hasta pilotos avanzados, tenemos el curso ideal para ti.</p>
-      </div>
-      <div class="cards">
-
-        <div class="card">
-          <div class="card-icon beginner">&#9651;</div>
-          <h3>Principiante</h3>
-          <p class="price">$149 <span>USD</span></p>
-          <ul>
-            <li>Introducción al mundo FPV</li>
-            <li>Componentes y electrónica básica</li>
-            <li>Soldadura para drones</li>
-            <li>Primer armado guiado</li>
-            <li>Simulador de vuelo</li>
-          </ul>
-          <a href="#contacto" class="btn-card">Inscribirme</a>
-        </div>
-
-        <div class="card featured">
-          <div class="featured-badge">Mas Popular</div>
-          <div class="card-icon intermediate">&#9650;</div>
-          <h3>Intermedio</h3>
-          <p class="price">$249 <span>USD</span></p>
-          <ul>
-            <li>Todo lo del nivel anterior</li>
-            <li>Configuracion de Flight Controller</li>
-            <li>Betaflight y ajuste de PIDs</li>
-            <li>Telemetria y FPV goggles</li>
-            <li>Primeros vuelos reales</li>
-            <li>Kit de componentes incluido</li>
-          </ul>
-          <a href="#contacto" class="btn-card">Inscribirme</a>
-        </div>
-
-        <div class="card">
-          <div class="card-icon advanced">&#11045;</div>
-          <h3>Avanzado</h3>
-          <p class="price">$399 <span>USD</span></p>
-          <ul>
-            <li>Todo lo del nivel intermedio</li>
-            <li>Racing y freestyle avanzado</li>
-            <li>Diseno de frames propios</li>
-            <li>Fotografia y video aereo</li>
-            <li>Regulaciones y licencias</li>
-            <li>Mentoria personalizada</li>
-          </ul>
-          <a href="#contacto" class="btn-card">Inscribirme</a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- PROCESO -->
-  <section class="section process" id="proceso">
-    <div class="container">
-      <div class="section-header">
-        <span class="tag">Como Funciona</span>
-        <h2>Tu Camino al Primer Vuelo</h2>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-number">01</div>
-          <h4>Elige tu Curso</h4>
-          <p>Selecciona el nivel que mejor se adapta a tu experiencia y objetivos.</p>
-        </div>
-        <div class="step-arrow">&#8594;</div>
-        <div class="step">
-          <div class="step-number">02</div>
-          <h4>Recibe tu Kit</h4>
-          <p>Te enviamos todos los componentes necesarios para armar tu drone.</p>
-        </div>
-        <div class="step-arrow">&#8594;</div>
-        <div class="step">
-          <div class="step-number">03</div>
-          <h4>Aprende en Vivo</h4>
-          <p>Clases en vivo con instructores y grabaciones disponibles 24/7.</p>
-        </div>
-        <div class="step-arrow">&#8594;</div>
-        <div class="step">
-          <div class="step-number">04</div>
-          <h4>Vuela y Comparte</h4>
-          <p>Únete a nuestra comunidad y participa en eventos y competencias.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIOS -->
-  <section class="section testimonials" id="testimonios">
-    <div class="container">
-      <div class="section-header">
-        <span class="tag">Testimonios</span>
-        <h2>Lo que Dicen Nuestros Alumnos</h2>
-      </div>
-      <div class="testimonial-grid">
-
-        <div class="testimonial">
-          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p>"Nunca habia soldado nada en mi vida. En 6 semanas ya tenia mi drone armado y volando. Los instructores son increibles."</p>
-          <div class="author">
-            <div class="avatar">CM</div>
-            <div>
-              <strong>Carlos M.</strong>
-              <span>Alumno Principiante</span>
+    <nav class="bg-stone-900 text-stone-100 sticky top-0 z-40 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold tracking-wider">🚁 FPV ACADEMY</div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#anatomia" class="hover:text-amber-400 transition-colors">Anatomía</a>
+                <a href="#sistemas" class="hover:text-amber-400 transition-colors">Video</a>
+                <a href="#presupuesto" class="hover:text-amber-400 transition-colors">Presupuesto</a>
+                <a href="#ruta" class="hover:text-amber-400 transition-colors">Guía</a>
+                <a href="#servicios" class="text-amber-400 font-bold hover:text-amber-300 transition-colors">Talleres & Tienda</a>
             </div>
-          </div>
+        </div>
+    </nav>
+
+    <header class="max-w-4xl mx-auto px-4 py-16 text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 mb-6">Domina el Vuelo FPV</h1>
+        <p class="text-lg text-stone-600 leading-relaxed mb-8">
+            El vuelo en Primera Persona combina la agilidad de los drones de carreras con la inmersión de la realidad virtual. Explora nuestra guía interactiva, entiende los componentes y da el primer paso hacia el aire libre.
+        </p>
+        <div class="flex justify-center gap-4 flex-wrap">
+            <a href="#anatomia" class="bg-stone-800 hover:bg-stone-900 text-white font-bold py-3 px-8 rounded-full transition-colors text-lg">
+                Explorar Guía
+            </a>
+            <a href="#servicios" class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-8 rounded-full transition-colors text-lg shadow-lg">
+                Ver Talleres y Equipos
+            </a>
+        </div>
+    </header>
+
+    <section id="anatomia" class="max-w-6xl mx-auto px-4 py-12 border-t border-stone-200">
+        <div class="mb-10 text-center md:text-left">
+            <h2 class="text-3xl font-bold text-stone-800 mb-4">Anatomía de un Dron FPV</h2>
+            <p class="text-stone-600 max-w-2xl">
+                Haz clic en cada tarjeta para entender qué hace cada pieza dentro del ecosistema modular de un dron de carreras.
+            </p>
         </div>
 
-        <div class="testimonial">
-          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p>"El curso intermedio cambio mi vida. Ahora grabo videos aereos para clientes y genero ingresos con mi hobby favorito."</p>
-          <div class="author">
-            <div class="avatar">LR</div>
-            <div>
-              <strong>Laura R.</strong>
-              <span>Alumna Intermedia</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-xl border border-stone-200 interactive-card cursor-pointer" onclick="updateComponentDetail('fc')">
+                <div class="text-3xl mb-3">🧠</div>
+                <h3 class="font-bold text-xl mb-2">Controlador (FC)</h3>
+                <p class="text-sm text-stone-500">El cerebro del dron. Procesa giroscopios y comandos del piloto.</p>
             </div>
-          </div>
-        </div>
-
-        <div class="testimonial">
-          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p>"La comunidad es lo mejor. Siempre hay alguien dispuesto a ayudar. Aprendi mas aqui que en cualquier video de YouTube."</p>
-          <div class="author">
-            <div class="avatar">JT</div>
-            <div>
-              <strong>Jorge T.</strong>
-              <span>Alumno Avanzado</span>
+            <div class="bg-white p-6 rounded-xl border border-stone-200 interactive-card cursor-pointer" onclick="updateComponentDetail('esc')">
+                <div class="text-3xl mb-3">⚡</div>
+                <h3 class="font-bold text-xl mb-2">Variador (ESC)</h3>
+                <p class="text-sm text-stone-500">Traduce señales del FC en corriente eléctrica para los motores.</p>
             </div>
-          </div>
+            <div class="bg-white p-6 rounded-xl border border-stone-200 interactive-card cursor-pointer" onclick="updateComponentDetail('motors')">
+                <div class="text-3xl mb-3">🌪️</div>
+                <h3 class="font-bold text-xl mb-2">Motores Brushless</h3>
+                <p class="text-sm text-stone-500">Proporcionan el empuje. Se miden en tamaño (ej. 2207) y KV.</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-stone-200 interactive-card cursor-pointer" onclick="updateComponentDetail('vtx')">
+                <div class="text-3xl mb-3">📡</div>
+                <h3 class="font-bold text-xl mb-2">Transmisor (VTX)</h3>
+                <p class="text-sm text-stone-500">Envía la señal de video a tus gafas FPV en tiempo real.</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-stone-200 interactive-card cursor-pointer" onclick="updateComponentDetail('rx')">
+                <div class="text-3xl mb-3">📻</div>
+                <h3 class="font-bold text-xl mb-2">Receptor (RX)</h3>
+                <p class="text-sm text-stone-500">Recibe comandos de la emisora. Protocolos: ELRS, Crossfire.</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-stone-200 interactive-card cursor-pointer" onclick="updateComponentDetail('battery')">
+                <div class="text-3xl mb-3">🔋</div>
+                <h3 class="font-bold text-xl mb-2">Batería LiPo</h3>
+                <p class="text-sm text-stone-500">Pilas de polímero de litio de alta descarga (C-rating).</p>
+            </div>
         </div>
 
-      </div>
-    </div>
-  </section>
+        <div id="component-detail-panel" class="mt-8 bg-stone-100 p-6 rounded-xl border-l-4 border-amber-500 hidden">
+            <h4 id="detail-title" class="font-bold text-xl mb-2">Selecciona un componente</h4>
+            <p id="detail-text" class="text-stone-700">Haz clic en una de las tarjetas superiores para ver un análisis técnico detallado.</p>
+        </div>
+    </section>
 
-  <!-- CONTACTO -->
-  <section class="section contact" id="contacto">
-    <div class="container contact-inner">
-      <div class="contact-text">
-        <span class="tag">Contacto</span>
-        <h2>Listo para Despegar?</h2>
-        <p>Inscribete hoy y da el primer paso hacia convertirte en piloto FPV. Cupos limitados por cohorte.</p>
-        <ul class="contact-info">
-          <li>&#9993; academia@fpvacademy.com</li>
-          <li>&#128241; +1 (555) 012-3456</li>
-          <li>&#128205; Clases online, comunidad global</li>
-        </ul>
-      </div>
-      <form class="contact-form">
-        <input type="text" placeholder="Tu nombre" required />
-        <input type="email" placeholder="Tu correo electronico" required />
-        <select>
-          <option value="" disabled selected>Selecciona un curso</option>
-          <option>Principiante - $149</option>
-          <option>Intermedio - $249</option>
-          <option>Avanzado - $399</option>
-        </select>
-        <textarea placeholder="Mensaje o preguntas (opcional)" rows="4"></textarea>
-        <button type="submit" class="btn-primary">Enviar Solicitud</button>
-      </form>
-    </div>
-  </section>
+    <section id="sistemas" class="bg-white py-12 border-t border-stone-200">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="mb-10 text-center md:text-left">
+                <h2 class="text-3xl font-bold text-stone-800 mb-4">Sistemas de Video: Analógico vs Digital</h2>
+                <p class="text-stone-600 max-w-2xl">
+                    Compara latencia vs calidad de imagen. Lo analógico es rápido y barato; lo digital ofrece inmersión total.
+                </p>
+            </div>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="logo">
-        <span class="logo-icon">&#9652;</span>
-        <span class="logo-text">FPV<strong>Academy</strong></span>
-      </div>
-      <p>&copy; 2026 FPV Academy. Todos los derechos reservados.</p>
-      <div class="social-links">
-        <a href="#">YouTube</a>
-        <a href="#">Instagram</a>
-        <a href="#">Discord</a>
-      </div>
-    </div>
-  </footer>
+            <div class="flex flex-col lg:flex-row items-center gap-8">
+                <div class="w-full lg:w-1/2">
+                    <div class="chart-container">
+                        <canvas id="videoComparisonChart"></canvas>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 space-y-4">
+                    <div class="p-4 bg-stone-50 rounded-lg border border-stone-200">
+                        <h4 class="font-bold text-lg mb-1 text-stone-800">📺 Analógico</h4>
+                        <p class="text-sm text-stone-600">Señal de TV tradicional. "Ruido" con interferencia, nunca se congela, latencia casi nula (10-15ms).</p>
+                    </div>
+                    <div class="p-4 bg-stone-50 rounded-lg border border-stone-200">
+                        <h4 class="font-bold text-lg mb-1 text-stone-800">🚀 DJI O3 / Walksnail</h4>
+                        <p class="text-sm text-stone-600">Alta definición (1080p/4K). Latencia un poco mayor (25-35ms). Imagen se pixela si la señal es débil.</p>
+                    </div>
+                    <div class="p-4 bg-stone-50 rounded-lg border border-stone-200">
+                        <h4 class="font-bold text-lg mb-1 text-stone-800">⚡ HDZero</h4>
+                        <p class="text-sm text-stone-600">Digital con latencia fija y ultra baja. Ideal para carreras, aunque con menor resolución que DJI.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <section id="presupuesto" class="max-w-6xl mx-auto px-4 py-12 border-t border-stone-200">
+        <div class="mb-10 text-center md:text-left">
+            <h2 class="text-3xl font-bold text-stone-800 mb-4">Distribución del Presupuesto</h2>
+        </div>
+        <div class="flex flex-col md:flex-row items-center gap-12 justify-center">
+            <div class="w-full md:w-1/2">
+                <div class="chart-container" style="max-width: 400px; height: 300px;">
+                    <canvas id="budgetChart"></canvas>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2">
+                <ul class="space-y-4">
+                    <li class="flex items-center justify-between p-3 bg-white rounded border border-stone-100">
+                        <span class="font-bold flex items-center"><span class="w-3 h-3 rounded-full bg-amber-500 mr-3"></span>Dron FPV (5")</span>
+                        <span class="text-stone-600 font-mono">~40%</span>
+                    </li>
+                    <li class="flex items-center justify-between p-3 bg-white rounded border border-stone-100">
+                        <span class="font-bold flex items-center"><span class="w-3 h-3 rounded-full bg-stone-800 mr-3"></span>Gafas FPV</span>
+                        <span class="text-stone-600 font-mono">~30%</span>
+                    </li>
+                    <li class="flex items-center justify-between p-3 bg-white rounded border border-stone-100">
+                        <span class="font-bold flex items-center"><span class="w-3 h-3 rounded-full bg-stone-400 mr-3"></span>Emisora (Radio)</span>
+                        <span class="text-stone-600 font-mono">~15%</span>
+                    </li>
+                    <li class="flex items-center justify-between p-3 bg-white rounded border border-stone-100">
+                        <span class="font-bold flex items-center"><span class="w-3 h-3 rounded-full bg-stone-200 mr-3"></span>Baterías & Cargador</span>
+                        <span class="text-stone-600 font-mono">~15%</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="ruta" class="bg-stone-900 py-16 text-stone-100 border-t border-stone-800">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-white">Ruta de Aprendizaje</h2>
+                <p class="text-stone-400 max-w-2xl mx-auto">Flujo de trabajo para dominar el vuelo Acro sin destrozar equipos caros el primer día.</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="w-full md:w-1/3 space-y-3">
+                    <button class="step-btn active w-full text-left px-5 py-4 rounded-lg border border-stone-700 bg-stone-800 font-bold transition-all" onclick="updatePath(1, this)">
+                        1. Simulador & Radio
+                    </button>
+                    <button class="step-btn w-full text-left px-5 py-4 rounded-lg border border-stone-700 bg-stone-800 font-bold transition-all" onclick="updatePath(2, this)">
+                        2. Micro Drones (Whoops)
+                    </button>
+                    <button class="step-btn w-full text-left px-5 py-4 rounded-lg border border-stone-700 bg-stone-800 font-bold transition-all" onclick="updatePath(3, this)">
+                        3. Dron Exterior
+                    </button>
+                </div>
+                
+                <div class="w-full md:w-2/3 bg-stone-800 p-8 rounded-xl border border-stone-700">
+                    <div id="path-content">
+                        <h3 class="text-2xl font-bold text-amber-400 mb-4">Paso 1: Radio y Simulador</h3>
+                        <p class="mb-4 text-stone-300 leading-relaxed">
+                            No compres el dron primero. Compra una buena radio (con ELRS) y conéctala a PC (Velocidrone, Liftoff).
+                        </p>
+                        <ul class="list-disc pl-5 space-y-2 text-stone-400">
+                            <li>Acostúmbrate al modo "Acro" (sin auto-nivelación).</li>
+                            <li>Práctica al menos 20-30 horas.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NUEVA SECCIÓN DE SERVICIOS -->
+    <section id="servicios" class="bg-amber-50 py-16 border-t border-amber-100">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="bg-amber-200 text-amber-800 font-bold px-3 py-1 rounded-full text-sm tracking-wide uppercase mb-3 inline-block">Nuestros Servicios</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-stone-900 mb-4">Pasa a la Acción: Talleres y Tienda</h2>
+                <p class="text-stone-600 max-w-2xl mx-auto text-lg">Ya sea que quieras aprender a construir tu propio dron con tus manos o comprar un equipo listo para surcar los cielos, te cubrimos las espaldas.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Taller Card -->
+                <div class="bg-white p-8 rounded-2xl shadow-md border border-stone-200 flex flex-col text-center transition hover:shadow-xl">
+                    <div class="text-6xl mb-4">🛠️</div>
+                    <h3 class="text-2xl font-bold text-stone-900 mb-3">Taller de Armado FPV</h3>
+                    <p class="text-stone-600 mb-6 flex-grow">Aprende a soldar desde cero, ensamblar todos los componentes electrónicos, configurar Betaflight, blindar tus receptores y entender la física de tu quad. <strong>Saldrás con tu dron construido y volando.</strong></p>
+                    <a href="https://api.whatsapp.com/send/?phone=51957085531&text=Hola%2C+quiero+anotarme+al+taller+BT&type=phone_number&app_absent=0" 
+                       target="_blank" 
+                       class="w-full bg-stone-900 hover:bg-stone-800 text-white font-bold py-4 px-6 rounded-xl transition-colors text-lg">
+                        Inscribirme al Taller
+                    </a>
+                </div>
+                
+                <!-- Tienda Card -->
+                <div class="bg-white p-8 rounded-2xl shadow-md border border-stone-200 flex flex-col text-center transition hover:shadow-xl">
+                    <div class="text-6xl mb-4">🚁</div>
+                    <h3 class="text-2xl font-bold text-stone-900 mb-3">Venta: Drones y Partes</h3>
+                    <p class="text-stone-600 mb-6 flex-grow">¿Prefieres saltarte la mesa de trabajo o necesitas repuestos? Vendemos drones completos listos para vincular a tu radio (Bind-and-Fly), radios ELRS, gafas y componentes sueltos (motores, stacks, VTX).</p>
+                    <a href="https://api.whatsapp.com/send/?phone=51957085531&text=Hola%2C+estoy+buscando+comprar+repuestos+o+un+dron+armado&type=phone_number&app_absent=0" 
+                       target="_blank" 
+                       class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 px-6 rounded-xl transition-colors text-lg">
+                        Consultar Stock y Precios
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-stone-950 text-stone-500 py-8 text-center text-sm">
+        <p>© 2026 Academia FPV. Documento interactivo base para Claude Code.</p>
+    </footer>
+
+    <script>
+        // Anatomia Datos
+        const componentData = {
+            fc: {
+                title: "Controlador de Vuelo (FC)",
+                text: "Es una placa de circuito impreso que contiene un microprocesador (STM32) y sensores (Giroscopio y Acelerómetro). Toma los comandos desde el receptor, evalúa la orientación del dron y calcula a qué velocidad debe girar cada motor cientos de veces por segundo."
+            },
+            esc: {
+                title: "Variador Electrónico de Velocidad (ESC)",
+                text: "Recibe señales digitales ultrarrápidas desde el FC y abre/cierra compuertas de transistores para enviar energía trifásica de alta corriente de la batería a los motores. Soportan picos masivos de amperaje."
+            },
+            motors: {
+                title: "Motores Brushless",
+                text: "El FPV usa motores sin escobillas. Se clasifican por tamaño del estator (ej. 2207 = 22mm ancho, 7mm alto) y KV (revoluciones por minuto por voltio sin carga)."
+            },
+            vtx: {
+                title: "Transmisor de Video (VTX)",
+                text: "Toma la imagen de la cámara y la emite por el aire hacia las gafas del piloto. En analógico se mide en milivatios (mW). Las antenas son críticas."
+            },
+            rx: {
+                title: "Receptor de Control (RX)",
+                text: "Escucha la emisora. ExpressLRS (ELRS) a 2.4GHz es el rey indiscutible hoy en día: rango enorme, código abierto y bajísima latencia."
+            },
+            battery: {
+                title: "Baterías LiPo",
+                text: "El FPV requiere descargas de energía violentas. Las LiPos se miden en Celdas (S), Capacidad (mAh) y Tasa de Descarga (C)."
+            }
+        };
+
+        function updateComponentDetail(key) {
+            const panel = document.getElementById('component-detail-panel');
+            const title = document.getElementById('detail-title');
+            const text = document.getElementById('detail-text');
+            title.textContent = componentData[key].title;
+            text.textContent = componentData[key].text;
+            panel.classList.remove('hidden');
+        }
+
+        // Ruta Datos
+        const pathData = {
+            1: {
+                title: "Paso 1: Simulador & Radio",
+                text: "No compres un dron primero. Compra una buena radio con ELRS y conéctala a tu PC. Usa simuladores como Velocidrone.",
+                list: ["Acostúmbrate al modo Acro.", "Práctica giros y acelerador 20 horas."]
+            },
+            2: {
+                title: "Paso 2: Tiny Whoops",
+                text: "Compra un micro dron de 65mm con protectores de hélices para volar dentro de casa.",
+                list: ["Son inofensivos; no romperás ventanas.", "Te enseñarán el ciclo de las baterías LiPo y el bind."]
+            },
+            3: {
+                title: "Paso 3: Dron Exterior",
+                text: "Cuando el interior quede chico, pasa a un 3.5 pulgadas o al clásico de 5 pulgadas.",
+                list: ["Vuela en espacios abiertos sin gente.", "Acostúmbrate al peso y la inercia real."]
+            }
+        };
+
+        function updatePath(stepIndex, buttonElement) {
+            const buttons = document.querySelectorAll('.step-btn');
+            buttons.forEach(btn => btn.classList.remove('active', 'bg-amber-500', 'text-white'));
+            buttons.forEach(btn => btn.classList.add('bg-stone-800', 'text-stone-300'));
+            
+            buttonElement.classList.remove('bg-stone-800', 'text-stone-300');
+            buttonElement.classList.add('active', 'bg-amber-500', 'text-white');
+
+            const contentDiv = document.getElementById('path-content');
+            const data = pathData[stepIndex];
+            
+            let html = `<h3 class="text-2xl font-bold text-amber-400 mb-4">${data.title}</h3>
+                        <p class="mb-4 text-stone-300 leading-relaxed">${data.text}</p>
+                        <ul class="list-disc pl-5 space-y-2 text-stone-400">`;
+            data.list.forEach(item => { html += `<li>${item}</li>`; });
+            html += `</ul>`;
+            contentDiv.innerHTML = html;
+        }
+
+        // Graficos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Chart Video
+            const ctxVideo = document.getElementById('videoComparisonChart').getContext('2d');
+            new Chart(ctxVideo, {
+                type: 'bar',
+                data: {
+                    labels: ['Analógico', 'DJI O3', 'Walksnail', 'HDZero'],
+                    datasets: [
+                        { label: 'Latencia (ms) - Menor mejor', data: [15, 32, 28, 14], backgroundColor: '#1c1917', yAxisID: 'y' },
+                        { label: 'Calidad (1-10) - Mayor mejor', data: [3, 10, 8, 6], backgroundColor: '#f59e0b', yAxisID: 'y1' }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: {
+                        y: { type: 'linear', position: 'left', title: { display: true, text: 'Latencia (ms)' } },
+                        y1: { type: 'linear', position: 'right', grid: { drawOnChartArea: false }, min: 0, max: 10, title: { display: true, text: 'Calidad' } }
+                    }
+                }
+            });
+
+            // Chart Presupuesto
+            const ctxBudget = document.getElementById('budgetChart').getContext('2d');
+            new Chart(ctxBudget, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Dron', 'Gafas', 'Radio', 'Baterías'],
+                    datasets: [{ data: [40, 30, 15, 15], backgroundColor: ['#f59e0b', '#1c1917', '#a8a29e', '#e7e5e4'], borderWidth: 2, borderColor: '#ffffff' }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, cutout: '70%' }
+            });
+        });
+    </script>
 </body>
 </html>
